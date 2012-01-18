@@ -13,9 +13,7 @@ public class InfinitePoint {
 	 */
 	public double  distanceEuclidienne(InfinitePoint p){
 		
-		if (variables == null
-				|| p.getVariables() == null
-				|| variables.size() != p.getVariables().size() )
+		if (variables.size() != p.getVariables().size() )
 			return -1;
 
 		double distance =0;
@@ -29,6 +27,28 @@ public class InfinitePoint {
 
 	public LinkedList<Double> getVariables() {
 		return variables;
+	}
+	
+	/**
+	 * Ajoute un autre point de même taille au point.
+	 * @param p : point à ajouter
+	 */
+	public void add(InfinitePoint p){
+		if (variables.size() != p.getVariables().size() ){
+			System.out.println("Attention! Points de tailles différentes!!");
+			return;
+		}
+		for (int i = 0; i < variables.size(); i++){
+			variables.set(i, variables.get(i) + p.getVariables().get(i));
+		}
+		
+		/**
+		 * Met à l'echelle le point
+		 * @param d : facteur d'echelle
+		 */
+		public void scale(Double d){
+			return 0;
+		}
 	}
 	
 	
