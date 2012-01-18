@@ -1,6 +1,8 @@
 /**
  * Projet tp K-means, pour la matière ANREC
  * 
+ * Classe contenant l'algorithme général
+ * 
  * @author eric
  */
 
@@ -10,7 +12,7 @@ import java.util.LinkedList;
 public class Kmeans {
 	protected  LinkedList<InfinitePoint> data =new LinkedList<InfinitePoint>();
 	protected  LinkedList<InfinitePoint> gravityCenters = new LinkedList<InfinitePoint>();
-	LinkedList<LinkedList<InfinitePoint>>groups = null;
+	protected  LinkedList<LinkedList<InfinitePoint>>groups = null;
 
 	/* -------------------------------Constructors------------------------*/
 	/**
@@ -26,6 +28,7 @@ public class Kmeans {
 			this.gravityCenters = gravityCenters;
 
 	}
+	
 
 	/* -------------------------------Main methods------------------------*/
 	/**
