@@ -60,4 +60,8 @@ public class InfinitePoint {
 		}
 	}
 	
+	public int getDimension(){
+		return  variables.size();
+	}
+	
 }
