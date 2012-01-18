@@ -42,14 +42,17 @@ public class InfinitePoint {
 			variables.set(i, variables.get(i) + p.getVariables().get(i));
 		}
 		
-		/**
-		 * Met à l'echelle le point
-		 * @param d : facteur d'echelle
-		 */
-		public void scale(Double d){
-			return 0;
-		}
 	}
 	
+	
+	/**
+	 * Met à l'echelle le point
+	 * @param d : facteur d'echelle
+	 */
+	public void scale(Double d){
+		for (int i = 0; i < variables.size(); i++){
+			variables.set(i, variables.get(i) *d);
+		}
+	}
 	
 }
