@@ -1,3 +1,9 @@
+/**
+ * Projet tp K-means, pour la matière ANREC
+ * 
+ * @author eric
+ */
+
 import java.util.LinkedList;
 
 
@@ -6,7 +12,7 @@ public class Kmeans {
 	protected  LinkedList<InfinitePoint> gravityCenters = new LinkedList<InfinitePoint>();
 	LinkedList<LinkedList<InfinitePoint>>groups = null;
 
-
+	/* -------------------------------Constructors------------------------*/
 	/**
 	 * Constructor
 	 * @param data
@@ -21,7 +27,7 @@ public class Kmeans {
 
 	}
 
-
+	/* -------------------------------Main methods------------------------*/
 	/**
 	 * reallocation step for k-means method
 	 */
@@ -47,6 +53,20 @@ public class Kmeans {
 		}
 	}
 
+	/**
+	 * recentering step for k-means method
+	 */
+	public void recentering(){
+		if (gravityCenters.size() != groups.size()){
+			System.out.println("Please do reallocation first");
+			return;
+		}
+		for (int i = 0; i < gravityCenters.size(); i++){
+			gravityCenters.set(i, getGravityCenter(groups.get(i)));
+		}
+	}
+
+	/* -------------------------------Tools------------------------*/
 
 	/**
 	 * calcule le centre de gravité d'un ensemble de points
@@ -58,9 +78,9 @@ public class Kmeans {
 		for (InfinitePoint p : points){
 			gravityCenter.add(p);
 		}
-		
+
 		gravityCenter.scale(1./points.size());
-		return null; 
+		return gravityCenter; 
 	}
 
 }
