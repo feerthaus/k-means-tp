@@ -1,3 +1,10 @@
+/**
+ * Projet tp K-means, pour la matière ANREC
+ * 
+ * Classe contenant le type de données (un point de dimension n inconnue à ce point)
+ * 
+ * @author eric
+ */
 import java.util.LinkedList;
 
 
@@ -43,6 +50,7 @@ public class InfinitePoint {
 			System.out.println("Attention! Points de tailles différentes!!");
 			return;
 		}
+		
 		for (int i = 0; i < variables.size(); i++){
 			variables.set(i, variables.get(i) + p.getVariables().get(i));
 		}
