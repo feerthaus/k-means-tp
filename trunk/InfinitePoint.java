@@ -11,14 +11,25 @@ public class InfinitePoint {
 	/**
 	 * Distance euclidienne
 	 */
-	public double  distance(InfinitePoint p){
-		if (variables == null || variables.size() < 1)
+	public double  distanceEuclidienne(InfinitePoint p){
+		
+		if (variables == null
+				|| p.getVariables() == null
+				|| variables.size() != p.getVariables().size() )
 			return -1;
 
 		double distance =0;
-		for(Double d : variables){
-			distance += d*d;
+		for(int i = 0; i < variables.size(); i++ ){
+			distance += (variables.get(i)- p.getVariables().get(i))
+					*(variables.get(i)- p.getVariables().get(i));
 		}
+		distance = Math.sqrt(distance);
 		return distance;
 	}
+
+	public LinkedList<Double> getVariables() {
+		return variables;
+	}
+	
+	
 }
