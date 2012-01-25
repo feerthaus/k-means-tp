@@ -54,7 +54,7 @@ public class InfinitePoint {
 		this.variables.add(abs);
 		this.variables.add(ord);
 	}
-
+  
 	/**
 	 * initialyze the attributes
 	 */
@@ -66,7 +66,7 @@ public class InfinitePoint {
 		return variables;
 	}
 	
-	static public double getEpsilon(){
+	public static double getEpsilon(){
 		return EPSILON;
 	}
 	
@@ -142,4 +142,9 @@ public class InfinitePoint {
 		s+=  "]";
 				return s;
 	}
+
+	public boolean isEqualTo(InfinitePoint p) throws DataFormatException{
+		return this.distanceEuclidienne(p)< EPSILON;
+	}
+
 }

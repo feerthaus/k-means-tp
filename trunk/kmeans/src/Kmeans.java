@@ -26,10 +26,7 @@ public class Kmeans {
 
 	private int dimension;
 
-	public int getDimension() {
-		return dimension;
-	}
-
+	
 	/* -------------------------------Constructors------------------------*/
 	/**
 	 * deactivated constructor
@@ -72,7 +69,7 @@ public class Kmeans {
 
 	}
 
-	public void init(){
+	private void init(){
 		this.data =new LinkedList<InfinitePoint>();
 		this.gravityCenters = new LinkedList<InfinitePoint>();
 		this.groups = null;
@@ -86,6 +83,13 @@ public class Kmeans {
 
 	public List<LinkedList<InfinitePoint>> getGroups() {
 		return groups;
+	}
+	
+	public int getDimension() throws DataFormatException{
+		if (dimension == -1){
+			throw new DataFormatException("Erreur de dimension");
+		}
+		return dimension;
 	}
 
 	/* -------------------------------Main methods------------------------*/
@@ -147,5 +151,7 @@ public class Kmeans {
 		gravityCenter.scale(1./points.size());
 		return gravityCenter; 
 	}
+	
+
 
 }
