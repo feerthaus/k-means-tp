@@ -43,10 +43,12 @@ public class testKMeans {
 		list.add(p3);
 		list.add(p4);
 		
-		InfinitePoint g1 = new InfinitePoint(0.5, 0.5);
+		InfinitePoint g1 = new InfinitePoint(0.1, 0.5);
+		InfinitePoint g2 = new InfinitePoint(0.9, 0.5);
 		List<InfinitePoint> gravityCenters = new LinkedList<InfinitePoint>();
 		gravityCenters.add(g1);
-		kmeans =  new Kmeans(list, new LinkedList<InfinitePoint>());
+		gravityCenters.add(g2);
+		kmeans =  new Kmeans(list, gravityCenters);
 	}
 
 	@Test
@@ -56,28 +58,58 @@ public class testKMeans {
 		List<InfinitePoint> points = kmeans.getData();
 		List<InfinitePoint> gravityCenters = kmeans.getGravityCenters();
 		
-		ok = kmeans.getDimension() = 2;
+		ok = kmeans.getDimension() == 2;
 		ok = ok && points.size() == 4;
-		ok = ok && points.get(0).distanceEuclidienne(
-				new InfinitePoint(0.,0.)) 
-				< InfinitePoint.getEpsilon() ;
-		ok = ok && points.get(1).distanceEuclidienne(
-				new InfinitePoint(1.,0.)) 
-				< InfinitePoint.getEpsilon() ;
-		ok = ok && points.get(2).distanceEuclidienne(
-				new InfinitePoint(1.,1.)) 
-				< InfinitePoint.getEpsilon() ;
-		ok = ok && points.get(3).distanceEuclidienne(
-				new InfinitePoint(0.,1.)) 
-				< InfinitePoint.getEpsilon() ;
+		ok = ok && points.get(0).isEqualTo(new InfinitePoint(0.,0.));
+		ok = ok && points.get(1).isEqualTo(new InfinitePoint(1.,0.));
+		ok = ok && points.get(2).isEqualTo(new InfinitePoint(1.,1.));
+		ok = ok && points.get(3).isEqualTo(new InfinitePoint(0.,1.));
 		
-		ok = ok && gravityCenters.size() == 1;
-		ok = ok && gravityCenters.get(0).distanceEuclidienne(
-				new InfinitePoint(0.5,0.5)) 
-				< InfinitePoint.getEpsilon() ;
+		ok = ok && gravityCenters.size() == 2;
+		ok = ok && gravityCenters.get(0).isEqualTo(new InfinitePoint(0.1,0.5));
+		ok = ok && gravityCenters.get(1).isEqualTo(new InfinitePoint(0.9,0.5));
 		
 		assertTrue(ok);	
 	}
 	
+	@Test
+	public void testReallocation() throws DataFormatException{
+		kmeans.reallocation();
+		List<LinkedList<InfinitePoint>> groups = kmeans.getGroups();
+		boolean ok = groups.size() == 2;
+		ok = ok && groups.get(0).size() == 2;
+		ok = ok && groups.get(1).size() == 2;
+		
+		ok = ok && (groups.get(0).getFirst().isEqualTo(new InfinitePoint(0,0))
+				||groups.get(0).getFirst().isEqualTo(new InfinitePoint(0,1)));
+		ok = ok && (groups.get(0).getLast().isEqualTo(new InfinitePoint(0,0))
+				||groups.get(0).getLast().isEqualTo(new InfinitePoint(0,1)));
 
+		ok = ok && ((groups.get(1).getFirst().isEqualTo(new InfinitePoint(1,0))
+						&&groups.get(1).getLast().isEqualTo(new InfinitePoint(1,1)))
+						
+				|| (groups.get(1).getFirst().isEqualTo(new InfinitePoint(1,1))
+						&&groups.get(1).getLast().isEqualTo(new InfinitePoint(1,0))));
+				
+	}
+	
+	@Test
+	public void testRecentering() throws DataFormatException{
+		kmeans.reallocation();
+		kmeans.recentering();
+		
+		List<InfinitePoint> centers = kmeans.getGravityCenters();
+		
+		boolean ok = centers.size()== 2;
+				
+		ok = ok && ((centers.get(0).isEqualTo(new InfinitePoint(0,0.5))
+				&& centers.get(1).isEqualTo(new InfinitePoint(1,0.5)))
+				
+		||(centers.get(0).isEqualTo(new InfinitePoint(1,0.5))
+				&& centers.get(1).isEqualTo(new InfinitePoint(0,0.5))));
+		
+		assertTrue(ok);
+	}
+	
+	
 }

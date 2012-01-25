@@ -180,12 +180,37 @@ public class testInfinitePoint extends TestCase {
 		assertTrue(p.toString().contentEquals("[1.0, 2.0, 3.0, 4.0, 5.0]"));
 		
 	}
+	
+	@Test
 	public void testString2(){
 		p= new InfinitePoint(0);
 		assertTrue(p.toString().contentEquals("[]"));
 		
 	}
 	 
+	@Test
+	public void testisEqualTo() throws DataFormatException{
+		LinkedList<Double> variables = new LinkedList<Double>();
+		variables.add(1.);
+		variables.add(2.);
+		variables.add(3.);
+		variables.add(4.);
+		variables.add(5.);
+		InfinitePoint p2 = new InfinitePoint(variables);
+		
+		assertTrue(p.isEqualTo(p2));
+	}
 	
+	public void testisNotEqualTo() throws DataFormatException{
+		LinkedList<Double> variables = new LinkedList<Double>();
+		variables.add(1.);
+		variables.add(2.);
+		variables.add(3.);
+		variables.add(4.);
+		variables.add(4.);
+		InfinitePoint p2 = new InfinitePoint(variables);
+		
+		assertTrue(!p.isEqualTo(p2));
+	}
 }
 
