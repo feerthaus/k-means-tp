@@ -18,14 +18,12 @@ import java.util.zip.DataFormatException;
 public class Kmeans {
 	private List<InfinitePoint> data;
 	private List<InfinitePoint> gravityCenters;
-	public List<InfinitePoint> getGravityCenters() {
-		return gravityCenters;
-	}
+	
 
 	private List<LinkedList<InfinitePoint>>groups;
 
 	private int dimension;
-
+	private String name;
 	
 	/* -------------------------------Constructors------------------------*/
 	/**
@@ -40,9 +38,9 @@ public class Kmeans {
 	 * @param gravityCenters
 	 * @throws DataFormatException 
 	 */
-	public Kmeans(List<InfinitePoint> data, List<InfinitePoint> gravityCenters) throws DataFormatException{
+	public Kmeans(String name, List<InfinitePoint> data, List<InfinitePoint> gravityCenters) throws DataFormatException{
 		
-		init();
+		init(name);
 
 		for (int i = 0; i < data.size(); i++){
 			InfinitePoint p = data.get(i);
@@ -69,7 +67,8 @@ public class Kmeans {
 
 	}
 
-	private void init(){
+	private void init(String name){
+		this.name = name;
 		this.data =new LinkedList<InfinitePoint>();
 		this.gravityCenters = new LinkedList<InfinitePoint>();
 		this.groups = null;
@@ -91,7 +90,13 @@ public class Kmeans {
 		}
 		return dimension;
 	}
-
+	public List<InfinitePoint> getGravityCenters() {
+		return gravityCenters;
+	}
+	
+	public String getName(){
+		return name;
+	}
 	/* -------------------------------Main methods------------------------*/
 	/**
 	 * reallocation step for k-means method
