@@ -70,16 +70,18 @@ public class ACPProjection {
 		
 		//Première composante principale
 		CP1AxisRatios = MatrixColumntoList(components, lines-1);
-		CP1Influence = values.get(lines -1, lines-1);
+		CP1Influence = values.get(lines -1, lines-1)/sommeValues;
 		
 		//Seconde composante principale
 		CP2AxisRatios = MatrixColumntoList(components, lines-2);
-		CP2Influence = values.get(lines -2, lines-2);
+		CP2Influence = values.get(lines -2, lines-2)/sommeValues;
 		
 		buildProjection(kmeans);
 	}
 	
-	
+	public double getAcpPrecision(){
+		return CP1Influence+CP2Influence;
+	}
 	/**
 	 * Construit la projection 2D à partir des composantes principales calculées précédemment.
 	 * @param kmeans
