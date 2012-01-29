@@ -54,6 +54,18 @@ public class InfinitePoint {
 		this.variables.add(abs);
 		this.variables.add(ord);
 	}
+	
+	/**
+	 * Constructor : create the point (abs,ord,cote)
+	 * @param abs
+	 * @param ord
+	 */
+	public InfinitePoint(double abs, double ord, double cote){
+		init();
+		this.variables.add(abs);
+		this.variables.add(ord);
+		this.variables.add(cote);
+	}
   
 	/**
 	 * initialyze the attributes
