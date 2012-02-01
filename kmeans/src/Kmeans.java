@@ -162,7 +162,7 @@ public class Kmeans {
 	 * @throws DataFormatException 
 	 */
 	private InfinitePoint getGravityCenter(List<InfinitePoint> points) throws DataFormatException{
-		InfinitePoint gravityCenter = new InfinitePoint(points.get(0).getDimension());
+		InfinitePoint gravityCenter = new InfinitePoint(points.get(0).getDimension(), points.get(0).getDistance());
 		for (InfinitePoint p : points){
 			gravityCenter.add(p);
 		}

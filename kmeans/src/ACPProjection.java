@@ -108,7 +108,7 @@ public class ACPProjection {
 	}
 	
 	public InfinitePoint doProjection(InfinitePoint p){
-		return new InfinitePoint(getCP1Coordinate(p), getCP2Coordinate(p));
+		return new InfinitePoint(getCP1Coordinate(p), getCP2Coordinate(p), p.getDistance());
 	}
 	/**
 	 * 
@@ -144,9 +144,20 @@ public class ACPProjection {
 		Kmeans kmeans = new Kmeans("test", vars, centers);
 		
 		kmeans.reallocation();
+		kmeans.recentering();
+		kmeans.reallocation();
+		kmeans.recentering();
+		kmeans.reallocation();
+		kmeans.recentering();
+		kmeans.reallocation();
 		ACPProjection proj = new ACPProjection(kmeans);
 		
-		ScatterPlot plot = new ScatterPlot(proj);
+		
+		proj.plotACP();
+	}
+	
+	public void plotACP(){
+		ScatterPlot plot = new ScatterPlot(this);
 		plot.pack();
 		plot.setVisible(true);
 	}
