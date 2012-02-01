@@ -87,6 +87,16 @@ final public class IOTools {
 		}
 		return i;
 	}
+	
+	public static int askDistance() throws java.util.InputMismatchException{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("entrez la distance voulue (l pour l1 et E pour euclidian)");
+		String e = sc.nextLine();
+		int i;
+		if (e=="l") {i=InfinitePoint.L1;}
+		else {i=InfinitePoint.EUCLIDIAN;}
+		return i;		
+	}
 
 }
 
