@@ -17,7 +17,7 @@ public class InfinitePoint {
 	private List<Double> variables;
 	static final double EPSILON = 1e-6;
 	static public final int EUCLIDIAN = 2;
-	static public final int  L1 = 1;
+	static public final int L1 = 1;
 	private int distance = EUCLIDIAN;
 	
 	/* -------------------------------Constructors------------------------*/
