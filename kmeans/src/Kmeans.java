@@ -104,10 +104,10 @@ public class Kmeans {
 		boolean hasChanged = true;
 		List<InfinitePoint> oldListGravity;
 		while(hasChanged){
+			oldListGravity = copyList(gravityCenters);
 			reallocation();
 			recentering();
 			hasChanged = compareGravities(oldListGravity);
-			oldListGravity = copyList(gravityCenters);
 		}
 	}
 
