@@ -44,14 +44,6 @@ public class ScatterPlot extends ApplicationFrame {
 		XYSeriesCollection dataset = new XYSeriesCollection();
 		List<LinkedList<InfinitePoint>> groups = acp.getGroups(); 
 		List<InfinitePoint> gravitycenters = acp.getACPGravityCenters();
-		for(int i = 0; i < groups.size(); i++){
-			XYSeries series1 = new XYSeries("Groupe "+i);
-			for (int j = 0; j < groups.get(i).size(); j++){
-				InfinitePoint p = groups.get(i).get(j);
-				series1.add(p.getVariables().get(0), p.getVariables().get(1));
-			}
-			dataset.addSeries(series1);
-		}
 		
 		XYSeries series1 = new XYSeries("GravityCenters ");
 		for (int j = 0; j < gravitycenters.size(); j++){
@@ -60,6 +52,18 @@ public class ScatterPlot extends ApplicationFrame {
 		}
 
 		dataset.addSeries(series1);
+		
+		
+		for(int i = 0; i < groups.size(); i++){
+			series1 = new XYSeries("Groupe "+i);
+			for (int j = 0; j < groups.get(i).size(); j++){
+				InfinitePoint p = groups.get(i).get(j);
+				series1.add(p.getVariables().get(0), p.getVariables().get(1));
+			}
+			dataset.addSeries(series1);
+		}
+		
+		
 		
 		dataset.setIntervalPositionFactor(0.01);
 		

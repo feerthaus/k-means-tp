@@ -88,6 +88,16 @@ public class InfinitePoint {
 	}
 	
 	/* -------------------------------Methods----------------------------*/
+	
+	public double distance(InfinitePoint p) throws DataFormatException{
+		if (distance == EUCLIDIAN){
+			return distanceEuclidienne(p);
+		}else{
+			return distanceL1(p);
+		}
+	}
+	
+	
 	/**
 	 * Distance euclidienne
 	 * @throws DataFormatException  
@@ -105,6 +115,22 @@ public class InfinitePoint {
 		distance = Math.sqrt(distance);
 		return distance;
 		}
+	}
+	
+	public double distanceL1(InfinitePoint p) throws DataFormatException{
+		
+			
+			if (variables.size() != p.getVariables().size() ){
+				throw new DataFormatException("Les points n'ont pas la même taille");
+			}else{
+			double distance =0;
+			for(int i = 0; i < variables.size(); i++ ){
+				distance += Math.abs(variables.get(i) - p.getVariables().get(i));
+			}
+			
+			return distance;
+			}
+		
 	}
 
 	

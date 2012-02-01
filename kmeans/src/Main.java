@@ -6,19 +6,24 @@
  */
 package src;
 
+import java.io.IOException;
+import java.util.zip.DataFormatException;
+
 /**
  * Main
  *Contains the main function
  */
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, DataFormatException {
 		
-		int value = IOTools.askDistanceType();
+		int value = IOTools.askDistance();
 		Kmeans kmeans = IOTools.readFile(value);
-		int number = IOTools.ask
+		int number = IOTools.askGravityCenter(kmeans);
 		
 		kmeans.compute(number);
 		ACPProjection acp = new ACPProjection(kmeans);
 		acp.plotACP();
+		
+		
 	}
 }
