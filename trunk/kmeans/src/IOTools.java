@@ -26,7 +26,7 @@ final public class IOTools {
 	//		 
 	//	 }
 
-	static Kmeans readFile() throws IOException, DataFormatException{
+	static Kmeans readFile(int distance) throws IOException, DataFormatException{
 		JFileChooser  win = new JFileChooser();
 		Component parent = new Button();
 		win.showDialog(parent, "Ouvrir");
@@ -46,7 +46,7 @@ final public class IOTools {
 		//			  int height = 0;
 		//			  int width = 0;
 		while ((line=reader.readLine()) != null) {
-			lineReader(line, data);
+			lineReader(line, data, distance);
 		}
 
 		//		        System.out.println(height);
@@ -60,7 +60,7 @@ final public class IOTools {
 		return km;
 	}
 
-	public static void lineReader(String line, List<InfinitePoint> data){
+	public static void lineReader(String line, List<InfinitePoint> data, int Distance){
 		//		 height++;
 		String[] splitted = line.split("	");
 		//     	width = splitted.length;
@@ -71,7 +71,7 @@ final public class IOTools {
 			myCoordinates.add(myDouble);
 		} 
 
-		InfinitePoint myPoint = new InfinitePoint(myCoordinates);
+		InfinitePoint myPoint = new InfinitePoint(myCoordinates, Distance);
 		data.add(myPoint);
 		//System.out.println(splitted[0]);
 	}

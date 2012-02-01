@@ -8,21 +8,22 @@ package src;
  * 
  * @author eric
  */
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.zip.DataFormatException;
 
 
 public class InfinitePoint {
 	private List<Double> variables;
-
 	static final double EPSILON = 1e-6;
+	static public final int EUCLIDIAN = 2;
+	static public final int  L1 = 1;
+	private int distance = EUCLIDIAN;
 	
 	/* -------------------------------Constructors------------------------*/
 	
+	
+
 	@SuppressWarnings("unused")
 	private InfinitePoint(){};
 	
@@ -30,8 +31,8 @@ public class InfinitePoint {
 	 * Generic constructor : 
 	 * @param size : dimension of the point. The coordinates are initialysed to O.0
 	 */
-	public InfinitePoint(int size){
-		init();
+	public InfinitePoint(int size,int distance){
+		init(distance);
 		 variables = new LinkedList<Double>();
 		for (int i = 0; i < size; i++){
 			variables.add(0.);
@@ -42,8 +43,8 @@ public class InfinitePoint {
 	 * Constructor 
 	 * @param variables : list of coordinates
 	 */
-	public InfinitePoint(List<Double>variables){
-		init();
+	public InfinitePoint(List<Double>variables , int distance){
+		init(distance);
 		this.variables = new LinkedList<Double>(variables);
 	}
 	
@@ -52,8 +53,8 @@ public class InfinitePoint {
 	 * @param abs
 	 * @param ord
 	 */
-	public InfinitePoint(double abs, double ord){
-		init();
+	public InfinitePoint(double abs, double ord, int distance){
+		init(distance);
 		this.variables.add(abs);
 		this.variables.add(ord);
 	}
@@ -63,8 +64,8 @@ public class InfinitePoint {
 	 * @param abs
 	 * @param ord
 	 */
-	public InfinitePoint(double abs, double ord, double cote){
-		init();
+	public InfinitePoint(double abs, double ord, double cote, int distance){
+		init(distance);
 		this.variables.add(abs);
 		this.variables.add(ord);
 		this.variables.add(cote);
@@ -73,8 +74,9 @@ public class InfinitePoint {
 	/**
 	 * initialyze the attributes
 	 */
-	private void init(){
+	private void init(int distance){
 		variables = new LinkedList<Double>();
+		this.distance = distance; 
 	}
 	/*-----------------------------Accessors-----------------------------*/
 	public List<Double> getVariables() {
@@ -168,8 +170,12 @@ public class InfinitePoint {
 			coordinates.add(d);
 			
 		
-		InfinitePoint p = new InfinitePoint(coordinates);
+		InfinitePoint p = new InfinitePoint(coordinates, this.distance);
 		
 		return p;
+	}
+	
+	public int getDistance() {
+		return distance;
 	}
 }
