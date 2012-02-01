@@ -18,13 +18,13 @@ import java.util.zip.DataFormatException;
 public class Kmeans {
 	private List<InfinitePoint> data;
 	private List<InfinitePoint> gravityCenters;
-	
+
 
 	private List<LinkedList<InfinitePoint>>groups;
 
 	private int dimension;
 	private String name;
-	
+
 	/* -------------------------------Constructors------------------------*/
 	/**
 	 * deactivated constructor
@@ -39,7 +39,7 @@ public class Kmeans {
 	 * @throws DataFormatException 
 	 */
 	public Kmeans(String name, List<InfinitePoint> data, List<InfinitePoint> gravityCenters) throws DataFormatException{
-		
+
 		init(name);
 
 		for (int i = 0; i < data.size(); i++){
@@ -50,9 +50,9 @@ public class Kmeans {
 				throw new DataFormatException("Les points ont des dimensions différentes!");
 			}
 			this.data.add(p);
-			
+
 		}
-		
+
 		for (int i = 0; i < gravityCenters.size(); i++){
 			InfinitePoint p = gravityCenters.get(i);
 			if(this.dimension == -1){
@@ -61,9 +61,9 @@ public class Kmeans {
 				throw new DataFormatException("Les points ont des dimensions différentes!");
 			}
 			this.gravityCenters.add(p);
-			
+
 		}
-		
+
 
 	}
 
@@ -83,7 +83,7 @@ public class Kmeans {
 	public List<LinkedList<InfinitePoint>> getGroups() {
 		return groups;
 	}
-	
+
 	public int getDimension() throws DataFormatException{
 		if (dimension == -1){
 			throw new DataFormatException("Erreur de dimension");
@@ -93,18 +93,25 @@ public class Kmeans {
 	public List<InfinitePoint> getGravityCenters() {
 		return gravityCenters;
 	}
-	
+
 	public String getName(){
 		return name;
 	}
 	/* -------------------------------Main methods------------------------*/
-	
-	public void compute(int number){
+
+	public void compute(int number) throws DataFormatException{
 		randomGravityCenters(number);
-		List<InfinitePoint> oldList = copyList(groups);
+		boolean hasChanged = true;
+		List<InfinitePoint> oldListGravity;
+		while(hasChanged){
+			reallocation();
+			recentering();
+			hasChanged = compareGravities(oldListGravity);
+			oldListGravity = copyList(gravityCenters);
+		}
 	}
-	
-	
+
+
 	/**
 	 * reallocation step for k-means method
 	 * @throws DataFormatException 
@@ -163,7 +170,7 @@ public class Kmeans {
 		gravityCenter.scale(1./points.size());
 		return gravityCenter; 
 	}
-	 
+
 	private void randomGravityCenters(int number){
 		gravityCenters = new LinkedList<InfinitePoint>();
 		for(int i = 0; i < number; i++){
@@ -171,13 +178,23 @@ public class Kmeans {
 			gravityCenters.add(gravityCenters.get(index).clone());
 		}
 	}
-	
-	
+
+
 	public List<InfinitePoint> copyList(List<InfinitePoint> listPoints){
 		List<InfinitePoint> list = new LinkedList<InfinitePoint>();
 		for (int i = 0; i < listPoints.size(); i ++){
+
 			list.add(listPoints.get(i).clone());
 		}
 		return list;
+	}
+	
+	public boolean compareGravities(List<InfinitePoint> oldList) throws DataFormatException{
+		boolean hasChanged = false;
+		for (int i = 0; i < oldList.size(); i ++){
+			hasChanged = hasChanged || 
+					oldList.get(i).distanceEuclidienne(gravityCenters.get(i))< InfinitePoint.EPSILON;
+		}
+		return hasChanged;
 	}
 }
