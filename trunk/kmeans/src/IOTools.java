@@ -5,12 +5,14 @@ import javax.swing.JFileChooser;
 import java.awt.Button;
 import java.awt.Component;
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 //import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.zip.DataFormatException;
 
 
@@ -26,9 +28,7 @@ final public class IOTools {
 
 	static Kmeans readFile() throws IOException, DataFormatException{
 		JFileChooser  win = new JFileChooser();
-
 		Component parent = new Button();
-
 		win.showDialog(parent, "Ouvrir");
 
 		File file = win.getSelectedFile();
@@ -74,6 +74,18 @@ final public class IOTools {
 		InfinitePoint myPoint = new InfinitePoint(myCoordinates);
 		data.add(myPoint);
 		//System.out.println(splitted[0]);
+	}
+	
+	public static int askGravityCenter(Kmeans km) throws java.util.InputMismatchException{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("entrez le nombre de centres de gravite");
+		int i = sc.nextInt();
+		int imax = km.getData().size();
+		while (i>imax){
+			System.out.println("nombre de centres trop grand - entrez a nouveau le nombre de centres de gravite");
+			i = sc.nextInt();
+		}
+		return i;
 	}
 
 }
