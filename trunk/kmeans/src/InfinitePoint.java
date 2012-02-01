@@ -8,8 +8,11 @@ package src;
  * 
  * @author eric
  */
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.zip.DataFormatException;
 
 
@@ -158,5 +161,15 @@ public class InfinitePoint {
 	public boolean isEqualTo(InfinitePoint p) throws DataFormatException{
 		return this.distanceEuclidienne(p)< EPSILON;
 	}
-
+	
+	public InfinitePoint clone(){
+		List<Double> coordinates = new LinkedList<Double>();
+		for (double d : this.getVariables())
+			coordinates.add(d);
+			
+		
+		InfinitePoint p = new InfinitePoint(coordinates);
+		
+		return p;
+	}
 }
