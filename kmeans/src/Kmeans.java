@@ -98,6 +98,13 @@ public class Kmeans {
 		return name;
 	}
 	/* -------------------------------Main methods------------------------*/
+	
+	public void compute(int number){
+		randomGravityCenters(number);
+		List<InfinitePoint> oldList = copyList(groups);
+	}
+	
+	
 	/**
 	 * reallocation step for k-means method
 	 * @throws DataFormatException 
@@ -164,5 +171,13 @@ public class Kmeans {
 			gravityCenters.add(gravityCenters.get(index).clone());
 		}
 	}
-
+	
+	
+	public List<InfinitePoint> copyList(List<InfinitePoint> listPoints){
+		List<InfinitePoint> list = new LinkedList<InfinitePoint>();
+		for (int i = 0; i < listPoints.size(); i ++){
+			list.add(listPoints.get(i).clone());
+		}
+		return list;
+	}
 }
