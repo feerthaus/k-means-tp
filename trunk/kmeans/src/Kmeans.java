@@ -175,7 +175,7 @@ public class Kmeans {
 		gravityCenters = new LinkedList<InfinitePoint>();
 		for(int i = 0; i < number; i++){
 			int index = (int)Math.ceil(Math.random()*data.size());
-			gravityCenters.add(gravityCenters.get(index).clone());
+			gravityCenters.add(data.get(index).clone());
 		}
 	}
 
