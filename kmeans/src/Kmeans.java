@@ -156,7 +156,13 @@ public class Kmeans {
 		gravityCenter.scale(1./points.size());
 		return gravityCenter; 
 	}
-	
-
+	 
+	private void randomGravityCenters(int number){
+		gravityCenters = new LinkedList<InfinitePoint>();
+		for(int i = 0; i < number; i++){
+			int index = (int)Math.ceil(Math.random()*data.size());
+			gravityCenters.add(gravityCenters.get(index).clone());
+		}
+	}
 
 }
