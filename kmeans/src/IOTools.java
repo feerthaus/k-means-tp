@@ -1,7 +1,5 @@
 package src;
 
-
-
 import javax.swing.JFileChooser;
 
 import java.awt.Button;
@@ -13,6 +11,7 @@ import java.io.IOException;
 //import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.zip.DataFormatException;
 
 
 final public class IOTools {
@@ -25,7 +24,7 @@ final public class IOTools {
 	//		 
 	//	 }
 
-	static void readFile() throws IOException{
+	static Kmeans readFile() throws IOException, DataFormatException{
 		JFileChooser  win = new JFileChooser();
 
 		Component parent = new Button();
@@ -37,14 +36,11 @@ final public class IOTools {
 		//		 String path = file.getAbsolutePath();
 		//		 
 		//		 System.out.println(path);
+		
+		String name = file.getName();
 
 		List<InfinitePoint> data = new LinkedList<InfinitePoint>();
-
-
-		BufferedReader reader;
-
-		reader = new BufferedReader(new FileReader(file));
-
+		BufferedReader reader = new BufferedReader(new FileReader(file));
 
 		String line = null;
 		//			  int height = 0;
@@ -56,11 +52,13 @@ final public class IOTools {
 		//		        System.out.println(height);
 		//		        System.out.println(width);
 		reader.close();
+		
+		List<InfinitePoint> gravityCenters = new LinkedList<InfinitePoint>();
+		
+		Kmeans km = new Kmeans(name, data, gravityCenters);
 
-
-
+		return km;
 	}
-
 
 	public static void lineReader(String line, List<InfinitePoint> data){
 		//		 height++;
@@ -78,9 +76,6 @@ final public class IOTools {
 		//System.out.println(splitted[0]);
 	}
 
-
-
-	
 }
 
 
